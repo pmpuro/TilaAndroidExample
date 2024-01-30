@@ -26,8 +26,11 @@ import io.tila.api.DerivativeSubscription
 import io.tila.api.EventHandlerSubscription
 import io.tila.api.EventId
 import io.tila.api.Machine
+import io.tila.api.StateDataList
 import io.tila.api.accessData
 import io.tila.api.accessDataOrNull
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -55,12 +58,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private val machine = Machine(data = mapOf(Data.counter to 100))
-        .apply {
-            registerEventHandlers()
-            registerDerivatives()
-            derive()
-        }
+    private val machine = createMachine(data = mapOf(Data.counter to 100)) {
+        registerEventHandlers()
+        registerDerivatives()
+    }
+
+    private fun createMachine(
+        data: DataMap = mapOf(),
+        initialStateData: StateDataList = listOf(),
+        coroutineScope: CoroutineScope = MainScope(),
+        block: Machine.() -> Unit
+    ) = Machine(data, initialStateData, coroutineScope).apply(block).also { it.derive() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
