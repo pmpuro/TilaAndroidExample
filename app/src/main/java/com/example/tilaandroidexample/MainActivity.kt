@@ -92,7 +92,7 @@ class MainActivity : ComponentActivity() {
                 while (isActive) {
                     delay(6.seconds)
                     val time = System.currentTimeMillis().toString()
-                    machine.createEvent(Events.ticker, mapOf(Argument.current to time))()
+                    machine.sendEvent(Events.ticker, mapOf(Argument.current to time))
                 }
             }
         }
