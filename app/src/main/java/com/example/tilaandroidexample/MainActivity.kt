@@ -21,6 +21,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.tilaandroidexample.MainActivity.*
 import com.example.tilaandroidexample.ui.theme.TilaAndroidExampleTheme
 import io.tila.api.DataId
+import io.tila.api.DataMap
 import io.tila.api.DerivativeSubscription
 import io.tila.api.EventHandlerSubscription
 import io.tila.api.EventId
@@ -119,9 +120,16 @@ private fun DerivativeSubscription.registerDerivatives() {
     }
 
     registerDerivative { appData ->
-        val value = appData.accessData<Int>(Ids.Data.counter)
-        mapOf(Ids.State.counterValue to value)
+        appData.deriveAppDataToStateDirectly<Int>(Ids.Data.counter, Ids.State.counterValue)
     }
+}
+
+private fun <T : Any> DataMap.deriveAppDataToStateDirectly(
+    source: DataId,
+    destination: DataId
+): DataMap {
+    val value = accessData<T>(source)
+    return mapOf(destination to value)
 }
 
 @Composable
