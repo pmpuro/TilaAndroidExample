@@ -132,7 +132,7 @@ private fun DerivativeSubscription.registerDerivatives() {
     }
 }
 
-private fun <T : Any> DataMap.deriveAppDataToStateDirectly(
+private inline fun <reified T : Any> DataMap.deriveAppDataToStateDirectly(
     source: DataId,
     destination: DataId
 ): DataMap {
