@@ -96,7 +96,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun setupTicker(coroutineScope: LifecycleCoroutineScope) {
+    private fun setupTicker(coroutineScope: LifecycleCoroutineScope) =
         coroutineScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 while (isActive) {
@@ -106,7 +106,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
 }
 
 private fun EventHandlerSubscription.registerEventHandlers() {
