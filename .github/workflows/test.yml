@@ -17,11 +17,16 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: run tests
-        uses: reactivecircus/android-emulator-runner@v2
+      - uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           arch: "x86_64"
           emulator-options: -gpu swiftshader_indirect -no-boot-anim -camera-back none
           disable-animations: true
           script: ./gradlew connectedAndroidTest
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Results
+          path: app/build/reports/androidTests
+        if: always()
+        
