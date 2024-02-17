@@ -1,20 +1,13 @@
 package com.example.tilaandroidexample
 
-import androidx.compose.ui.semantics.SemanticsProperties.TestTag
 import androidx.compose.ui.semantics.SemanticsProperties.Text
 import androidx.compose.ui.semantics.getOrNull
-import androidx.compose.ui.test.assertTextContains
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
