@@ -17,7 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.tilaandroidexample.MainActivity.*
+import com.example.tilaandroidexample.MainActivity.Ids
 import com.example.tilaandroidexample.ui.theme.TilaAndroidExampleTheme
 import com.github.pmpuro.tila.api.DataId
 import com.github.pmpuro.tila.api.DataMap
@@ -57,7 +57,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private val machine = createMachine(data = mapOf(Data.counter to 100)) {
+    private fun createInitialAppData() = mapOf(Data.counter to 100)
+    private val machine = createMachine(data = createInitialAppData()) {
         registerEventHandlers()
         registerDerivatives()
     }
