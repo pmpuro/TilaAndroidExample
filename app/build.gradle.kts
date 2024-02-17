@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(platform(libs.compose.bom))
     testImplementation(libs.junit)
+    androidTestImplementation(libs.strikt.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ui.test.junit4)
