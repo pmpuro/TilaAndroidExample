@@ -26,6 +26,6 @@ jobs:
         with:
           api-level: 30
           arch: "x86_64"
-          emulator-options: -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -gpu swiftshader_indirect -no-boot-anim -camera-back none
           disable-animations: false
           script: ./gradlew connectedCheck
