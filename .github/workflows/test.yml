@@ -20,9 +20,9 @@ jobs:
           java-version: '17'
       - uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30
+          api-level: 34
           arch: "x86_64"
-          emulator-options: -gpu swiftshader_indirect -no-boot-anim -camera-back none
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: ./gradlew connectedAndroidTest
       - uses: actions/upload-artifact@v2
