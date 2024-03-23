@@ -20,16 +20,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.tilaandroidexample.MainActivity.Ids
 import com.example.tilaandroidexample.ui.theme.TilaAndroidExampleTheme
 import com.github.pmpuro.tila.api.DataId
-import com.github.pmpuro.tila.api.DataMap
 import com.github.pmpuro.tila.api.DerivativeSubscription
 import com.github.pmpuro.tila.api.EventHandlerSubscription
 import com.github.pmpuro.tila.api.EventId
-import com.github.pmpuro.tila.api.Machine
-import com.github.pmpuro.tila.api.StateDataList
 import com.github.pmpuro.tila.api.accessData
 import com.github.pmpuro.tila.api.accessDataOrNull
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
+import com.github.pmpuro.tila.api.createMachine
+import com.github.pmpuro.tila.api.deriveAppDataToStateDirectly
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -62,13 +59,6 @@ class MainActivity : ComponentActivity() {
         registerEventHandlers()
         registerDerivatives()
     }
-
-    private fun createMachine(
-        data: DataMap = mapOf(),
-        initialStateData: StateDataList = listOf(),
-        coroutineScope: CoroutineScope = MainScope(),
-        block: Machine.() -> Unit
-    ) = Machine(data, initialStateData, coroutineScope).apply(block).also { it.derive() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,14 +120,6 @@ private fun DerivativeSubscription.registerDerivatives() {
     registerDerivative { appData ->
         appData.deriveAppDataToStateDirectly<Int>(Ids.Data.counter, Ids.State.counterValue)
     }
-}
-
-private inline fun <reified T : Any> DataMap.deriveAppDataToStateDirectly(
-    source: DataId,
-    destination: DataId
-): DataMap {
-    val value = accessData<T>(source)
-    return mapOf(destination to value)
 }
 
 @Composable
